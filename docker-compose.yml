@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: gunicorn basis_lead_system.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DEBUG=False
+      - DB_NAME=lead_db
+      - DB_USER=lead_user
+      - DB_PASSWORD=lead_pass
+      - DB_HOST=db
+      - DB_PORT=5432
+
+  bot:
+    build: .
+    command: python bot/bot.py
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: lead_db
+      POSTGRES_USER: lead_user
+      POSTGRES_PASSWORD: lead_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+
+  celery:
+    build: .
+    command: celery -A basis_lead_system worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DEBUG=False
+      - DB_NAME=lead_db
+      - DB_USER=lead_user
+      - DB_PASSWORD=lead_pass
+      - DB_HOST=db
+      - DB_PORT=5432
+
+volumes:
+  postgres_data:

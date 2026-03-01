@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basis Lead Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<div class="mb-4 space-x-4">
+    <a href="/leads/" class="bg-blue-500 text-white px-4 py-2 rounded">Все лиды</a>
+    <a href="/hot/" class="bg-red-500 text-white px-4 py-2 rounded">🔥 Горячие лиды</a>
+    <a href="/logout/" class="bg-gray-500 text-white px-4 py-2 rounded">Выйти</a>
+</div>
+
+<body class="bg-gray-100">
+
+<div class="max-w-6xl mx-auto p-6">
+
+    <h1 class="text-3xl font-bold mb-6">📊 Basis Lead System</h1>
+
+    <div class="grid grid-cols-5 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-gray-500">Всего заявок</p>
+            <p class="text-2xl font-bold">{{ total_leads }}</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-gray-500">🔥 Горячие</p>
+            <p class="text-2xl font-bold text-red-500">{{ hot_leads }}</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-gray-500">💰 Средний бюджет</p>
+            <p class="text-2xl font-bold">{{ avg_budget }}</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-gray-500">✅ Закрытые</p>
+            <p class="text-2xl font-bold text-green-600">{{ closed_leads }}</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <p class="text-gray-500">📈 Конверсия</p>
+            <p class="text-2xl font-bold text-blue-600">{{ conversion }}%</p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+        <canvas id="leadChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+    const data = {
+        labels: [{% for item in chart_data %}"{{ item.day }}",{% endfor %}],
+        datasets: [{
+            label: 'Заявки за последние 7 дней',
+            data: [{% for item in chart_data %}{{ item.count }},{% endfor %}],
+        }]
+    };
+
+    new Chart(
+        document.getElementById('leadChart'),
+        {
+            type: 'line',
+            data: data,
+        }
+    );
+</script>
+
+</body>
+</html>
