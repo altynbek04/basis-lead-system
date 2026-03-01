@@ -1,0 +1,36 @@
+# Basis Lead System
+
+Lead management system built with Django, PostgreSQL, Redis and Celery.
+
+## 🚀 Stack
+- Django
+- PostgreSQL
+- Redis
+- Celery
+- Docker & Docker Compose
+- Telegram Bot (aiogram)
+
+## 🏗 Architecture
+- Web service (Gunicorn)
+- Bot service
+- PostgreSQL database
+- Redis message broker
+- Celery worker
+
+## ⚡ Features
+- Lead collection via Telegram bot
+- Hot lead detection
+- Async background processing
+- Admin dashboard
+
+## 🐳 Run locally
+
+docker-compose up --build
+
+Open:
+http://localhost:8000
+
+## 🔐 Security
+Environment variables stored in .env
+.env is excluded from git
+.env.example provided
