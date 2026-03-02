@@ -1,6 +1,11 @@
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Django](https://img.shields.io/badge/Django-Backend-green) ![Docker](https://img.shields.io/badge/Docker-Enabled-blue) ![Postgres](https://img.shields.io/badge/PostgreSQL-15-blue) ![Redis](https://img.shields.io/badge/Redis-7-red)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Django](https://img.shields.io/badge/Django-Backend-green)
+![Docker](https://img.shields.io/badge/Docker-Enabled-blue)
+![Postgres](https://img.shields.io/badge/PostgreSQL-15-blue)
+![Redis](https://img.shields.io/badge/Redis-7-red)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-Development-orange)
+
 # 🚀 Basis Lead System
 
 Production-ready Lead Management System built with Django, PostgreSQL, Redis, Celery and Docker.
@@ -15,32 +20,35 @@ The system is designed with production deployment in mind.
 
 ---
 
+## 🏗 Architecture
+
 ```
 Telegram User
       ↓
    Bot Service
       ↓
-  PostgreSQL
+  PostgreSQL (Database)
       ↓
-     Redis
+     Redis (Broker)
       ↓
    Celery Worker
       ↓
   Django Dashboard
 ```
 
+---
 
-### Services
+## 🧩 Services
 
 | Service | Description |
 |----------|------------|
-| `web` | Django app served by Gunicorn |
+| `web` | Django application served by Gunicorn |
 | `bot` | Telegram bot (aiogram) |
 | `db` | PostgreSQL database |
 | `redis` | Message broker |
 | `celery` | Background task processor |
 
-All services run in isolated Docker containers.
+All services run in isolated Docker containers and communicate via Docker network.
 
 ---
 
@@ -61,10 +69,10 @@ All services run in isolated Docker containers.
 
 - Lead collection via Telegram
 - Automatic hot lead detection
-- Async background processing
+- Asynchronous background processing
 - Admin dashboard
 - Dockerized multi-service architecture
-- Production-ready database (PostgreSQL)
+- Production-ready PostgreSQL database
 
 ---
 
@@ -72,38 +80,51 @@ All services run in isolated Docker containers.
 
 ```bash
 docker-compose up --build
+```
 
-Open: http://localhost:8000
+Open in browser:
 
-🔐 Environment Setup
+```
+http://localhost:8000
+```
 
-Create .env file based on .env.example:
+---
+
+## 🔐 Environment Setup
+
+Create a `.env` file based on `.env.example`:
+
+```env
 SECRET_KEY=your_secret_key
 POSTGRES_DB=your_db
 POSTGRES_USER=your_user
 POSTGRES_PASSWORD=your_password
 BOT_TOKEN=your_bot_token
 ADMIN_ID=your_admin_id
-📦 Почему выбрана такая архитектура? (Why This Architecture?)
+```
 
-Асинхронная обработка через Celery повышает scalability системы и разгружает основной web-процесс
+---
 
-Redis используется как message broker для очередей фоновых задач
+## 📦 Why This Architecture?
 
-PostgreSQL выбран как production-ready база данных с поддержкой транзакций и высокой надёжностью
+- Asynchronous processing via **Celery** improves scalability and removes heavy tasks from the main web process
+- **Redis** is used as a message broker for background task queues
+- **PostgreSQL** is chosen as a production-ready relational database
+- **Docker** ensures service isolation and environment portability
+- Separation of bot and web services improves maintainability and scalability
 
-Docker обеспечивает service isolation и portability окружения
+---
 
-Разделение bot и web сервисов улучшает maintainability и упрощает масштабирование
+## 📈 Future Improvements
 
-📈 Future Improvements (Возможные улучшения)
+- Implement **JWT authentication** for API
+- Add full **REST API** layer
+- Configure automated **CI/CD pipeline**
+- Deploy using **Kubernetes** for horizontal scaling
+- Support **SaaS multi-tenant architecture**
 
-Реализация JWT authentication для API
+---
 
-Добавление полноценного REST API слоя
+## 👨‍💻 Author
 
-Настройка автоматического CI/CD pipeline
-
-Развёртывание в Kubernetes для horizontal scaling
-
-Поддержка SaaS multi-tenant architecture
+Backend architecture project focused on scalable system design and production-ready development practices.
