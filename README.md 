@@ -1,36 +1,108 @@
-# Basis Lead System
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![Django](https://img.shields.io/badge/Django-Backend-green) ![Docker](https://img.shields.io/badge/Docker-Enabled-blue) ![Postgres](https://img.shields.io/badge/PostgreSQL-15-blue) ![Redis](https://img.shields.io/badge/Redis-7-red)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-Development-orange)
+# 🚀 Basis Lead System
 
-Lead management system built with Django, PostgreSQL, Redis and Celery.
+Production-ready Lead Management System built with Django, PostgreSQL, Redis, Celery and Docker.
 
-## 🚀 Stack
-- Django
-- PostgreSQL
-- Redis
-- Celery
-- Docker & Docker Compose
-- Telegram Bot (aiogram)
+---
+
+## 🧠 Project Overview
+
+Basis Lead System is a scalable backend architecture for collecting and processing client leads via Telegram bot, with asynchronous background processing and a web dashboard.
+
+The system is designed with production deployment in mind.
+
+---
 
 ## 🏗 Architecture
-- Web service (Gunicorn)
-- Bot service
-- PostgreSQL database
-- Redis message broker
-- Celery worker
+Telegram User
+↓
+Bot Service
+↓
+PostgreSQL (DB)
+↓
+Redis (Broker)
+↓
+Celery Worker
+↓
+Django Dashboard
 
-## ⚡ Features
-- Lead collection via Telegram bot
-- Hot lead detection
+
+### Services
+
+| Service | Description |
+|----------|------------|
+| `web` | Django app served by Gunicorn |
+| `bot` | Telegram bot (aiogram) |
+| `db` | PostgreSQL database |
+| `redis` | Message broker |
+| `celery` | Background task processor |
+
+All services run in isolated Docker containers.
+
+---
+
+## ⚙ Tech Stack
+
+- Python 3.12
+- Django
+- PostgreSQL 15
+- Redis 7
+- Celery
+- Gunicorn
+- Docker & Docker Compose
+- Telegram Bot API (aiogram)
+
+---
+
+## 🔥 Features
+
+- Lead collection via Telegram
+- Automatic hot lead detection
 - Async background processing
 - Admin dashboard
+- Dockerized multi-service architecture
+- Production-ready database (PostgreSQL)
 
-## 🐳 Run locally
+---
 
+## 🐳 Run Locally
+
+```bash
 docker-compose up --build
 
-Open:
-http://localhost:8000
+Open: http://localhost:8000
 
-## 🔐 Security
-Environment variables stored in .env
-.env is excluded from git
-.env.example provided
+🔐 Environment Setup
+
+Create .env file based on .env.example:
+SECRET_KEY=your_secret_key
+POSTGRES_DB=your_db
+POSTGRES_USER=your_user
+POSTGRES_PASSWORD=your_password
+BOT_TOKEN=your_bot_token
+ADMIN_ID=your_admin_id
+📦 Почему выбрана такая архитектура? (Why This Architecture?)
+
+Асинхронная обработка через Celery повышает scalability системы и разгружает основной web-процесс
+
+Redis используется как message broker для очередей фоновых задач
+
+PostgreSQL выбран как production-ready база данных с поддержкой транзакций и высокой надёжностью
+
+Docker обеспечивает service isolation и portability окружения
+
+Разделение bot и web сервисов улучшает maintainability и упрощает масштабирование
+
+📈 Future Improvements (Возможные улучшения)
+
+Реализация JWT authentication для API
+
+Добавление полноценного REST API слоя
+
+Настройка автоматического CI/CD pipeline
+
+Развёртывание в Kubernetes для horizontal scaling
+
+Поддержка SaaS multi-tenant architecture
