@@ -15,18 +15,19 @@ The system is designed with production deployment in mind.
 
 ---
 
-## 🏗 Architecture
+```
 Telegram User
-↓
-Bot Service
-↓
-PostgreSQL (DB)
-↓
-Redis (Broker)
-↓
-Celery Worker
-↓
-Django Dashboard
+      ↓
+   Bot Service
+      ↓
+  PostgreSQL
+      ↓
+     Redis
+      ↓
+   Celery Worker
+      ↓
+  Django Dashboard
+```
 
 
 ### Services
