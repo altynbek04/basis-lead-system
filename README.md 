@@ -1,54 +1,38 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Django](https://img.shields.io/badge/Django-Backend-green)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-blue)
-![Postgres](https://img.shields.io/badge/PostgreSQL-15-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
 ![Redis](https://img.shields.io/badge/Redis-7-red)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Celery](https://img.shields.io/badge/Celery-Async-success)
 ![Status](https://img.shields.io/badge/status-Development-orange)
 
 # 🚀 Basis Lead System
 
-Production-ready Lead Management System built with Django, PostgreSQL, Redis, Celery and Docker.
+Scalable Lead Management Backend built with Django, PostgreSQL, Redis, Celery and Docker.
+
+Designed as a production-ready architecture project demonstrating async processing, service separation and containerized deployment.
 
 ---
 
-## 🧠 Project Overview
+## 📌 About the Project
 
-Basis Lead System is a scalable backend architecture for collecting and processing client leads via Telegram bot, with asynchronous background processing and a web dashboard.
+Basis Lead System collects leads through a Telegram bot, processes them asynchronously, calculates priority scores and displays results in a web dashboard.
 
-The system is designed with production deployment in mind.
-
----
-
-## 🏗 Architecture
-
-```
-Telegram User
-      ↓
-   Bot Service
-      ↓
-  PostgreSQL (Database)
-      ↓
-     Redis (Broker)
-      ↓
-   Celery Worker
-      ↓
-  Django Dashboard
-```
+The system is structured as a multi-service Docker architecture to simulate real-world backend environments.
 
 ---
 
-## 🧩 Services
+## 🧱 System Architecture
 
-| Service | Description |
-|----------|------------|
-| `web` | Django application served by Gunicorn |
-| `bot` | Telegram bot (aiogram) |
-| `db` | PostgreSQL database |
-| `redis` | Message broker |
-| `celery` | Background task processor |
+Instead of a monolithic design, the system is divided into independent services:
 
-All services run in isolated Docker containers and communicate via Docker network.
+- **Bot Service** – handles Telegram interactions
+- **Web Service** – Django application (Gunicorn)
+- **PostgreSQL** – relational database
+- **Redis** – message broker
+- **Celery Worker** – background task processor
+
+All services run in isolated Docker containers and communicate via internal Docker network.
 
 ---
 
@@ -61,22 +45,24 @@ All services run in isolated Docker containers and communicate via Docker networ
 - Celery
 - Gunicorn
 - Docker & Docker Compose
-- Telegram Bot API (aiogram)
+- aiogram (Telegram Bot API)
 
 ---
 
-## 🔥 Features
+## 🔥 Core Features
 
 - Lead collection via Telegram
 - Automatic hot lead detection
-- Asynchronous background processing
-- Admin dashboard
-- Dockerized multi-service architecture
-- Production-ready PostgreSQL database
+- Background task processing (Celery)
+- PostgreSQL production database
+- Dockerized multi-service setup
+- Scalable architecture design
 
 ---
 
-## 🐳 Run Locally
+## 🐳 Local Development
+
+Run the full system:
 
 ```bash
 docker-compose up --build
@@ -90,9 +76,9 @@ http://localhost:8000
 
 ---
 
-## 🔐 Environment Setup
+## 🔐 Environment Variables
 
-Create a `.env` file based on `.env.example`:
+Create `.env` file based on `.env.example`:
 
 ```env
 SECRET_KEY=your_secret_key
@@ -105,26 +91,38 @@ ADMIN_ID=your_admin_id
 
 ---
 
-## 📦 Why This Architecture?
+## 📦 Architectural Decisions
 
-- Asynchronous processing via **Celery** improves scalability and removes heavy tasks from the main web process
-- **Redis** is used as a message broker for background task queues
-- **PostgreSQL** is chosen as a production-ready relational database
-- **Docker** ensures service isolation and environment portability
-- Separation of bot and web services improves maintainability and scalability
+- Heavy processing moved to **Celery** to improve scalability
+- **Redis** used as message broker for async tasks
+- **PostgreSQL** selected for production reliability and transaction support
+- Services separated to improve maintainability
+- Docker used to replicate production-like environment
 
 ---
 
-## 📈 Future Improvements
+## 📈 Planned Improvements
 
-- Implement **JWT authentication** for API
-- Add full **REST API** layer
-- Configure automated **CI/CD pipeline**
-- Deploy using **Kubernetes** for horizontal scaling
-- Support **SaaS multi-tenant architecture**
+- REST API layer
+- JWT authentication
+- CI/CD pipeline
+- Kubernetes deployment
+- SaaS multi-tenant support
+
+---
+
+## 🎯 Purpose
+
+This project demonstrates:
+
+- Understanding of backend architecture
+- Async processing patterns
+- Containerized deployment
+- Service-oriented design
+- Production-ready database usage
 
 ---
 
 ## 👨‍💻 Author
 
-Backend architecture project focused on scalable system design and production-ready development practices.
+Backend architecture project focused on scalable system design and real-world engineering practices.
