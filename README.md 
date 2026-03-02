@@ -8,31 +8,29 @@
 
 # 🚀 Basis Lead System
 
-Scalable Lead Management Backend built with Django, PostgreSQL, Redis, Celery and Docker.
-
-Designed as a production-ready architecture project demonstrating async processing, service separation and containerized deployment.
+Multi-service Lead Management backend built with Django, PostgreSQL, Redis and Celery.
 
 ---
 
-## 📌 About the Project
+## 📌 Overview
 
-Basis Lead System collects leads through a Telegram bot, processes them asynchronously, calculates priority scores and displays results in a web dashboard.
+Basis Lead System collects leads via Telegram bot, processes them asynchronously and displays results in a web dashboard.
 
-The system is structured as a multi-service Docker architecture to simulate real-world backend environments.
+The project demonstrates scalable backend architecture using service separation and containerization.
 
 ---
 
-## 🧱 System Architecture
+## 🧱 Architecture
 
-Instead of a monolithic design, the system is divided into independent services:
+The system is split into independent services:
 
-- **Bot Service** – handles Telegram interactions
-- **Web Service** – Django application (Gunicorn)
-- **PostgreSQL** – relational database
-- **Redis** – message broker
-- **Celery Worker** – background task processor
+- **bot** — Telegram bot (aiogram)
+- **web** — Django app served by Gunicorn
+- **db** — PostgreSQL database
+- **redis** — message broker
+- **celery** — background task worker
 
-All services run in isolated Docker containers and communicate via internal Docker network.
+All services run inside Docker containers and communicate through an internal network.
 
 ---
 
@@ -44,85 +42,62 @@ All services run in isolated Docker containers and communicate via internal Dock
 - Redis 7
 - Celery
 - Gunicorn
-- Docker & Docker Compose
-- aiogram (Telegram Bot API)
+- Docker / Docker Compose
+- aiogram
 
 ---
 
-## 🔥 Core Features
+## 🔥 Features
 
-- Lead collection via Telegram
-- Automatic hot lead detection
-- Background task processing (Celery)
+- Telegram lead collection
+- Hot lead detection
+- Async background processing
 - PostgreSQL production database
-- Dockerized multi-service setup
-- Scalable architecture design
+- Dockerized architecture
 
 ---
 
-## 🐳 Local Development
-
-Run the full system:
+## 🐳 Run Locally
 
 ```bash
 docker-compose up --build
-```
 
-Open in browser:
+Open:http://localhost:8000
+🔐 Environment Variables
 
-```
-http://localhost:8000
-```
-
----
-
-## 🔐 Environment Variables
-
-Create `.env` file based on `.env.example`:
-
-```env
+Create .env based on .env.example:
 SECRET_KEY=your_secret_key
 POSTGRES_DB=your_db
 POSTGRES_USER=your_user
 POSTGRES_PASSWORD=your_password
 BOT_TOKEN=your_bot_token
 ADMIN_ID=your_admin_id
-```
 
----
+📦 Architectural Decisions
 
-## 📦 Architectural Decisions
+Celery used for asynchronous processing
 
-- Heavy processing moved to **Celery** to improve scalability
-- **Redis** used as message broker for async tasks
-- **PostgreSQL** selected for production reliability and transaction support
-- Services separated to improve maintainability
-- Docker used to replicate production-like environment
+Redis used as message broker
 
----
+PostgreSQL selected for reliability and transactions
 
-## 📈 Planned Improvements
+Service separation improves scalability and maintainability
 
-- REST API layer
-- JWT authentication
-- CI/CD pipeline
-- Kubernetes deployment
-- SaaS multi-tenant support
+Docker ensures consistent environment
 
----
+📈 Future Improvements
 
-## 🎯 Purpose
+REST API layer
 
-This project demonstrates:
+JWT authentication
 
-- Understanding of backend architecture
-- Async processing patterns
-- Containerized deployment
-- Service-oriented design
-- Production-ready database usage
+CI/CD integration
 
----
+Kubernetes deployment
 
-## 👨‍💻 Author
+SaaS multi-tenant support
 
-Backend architecture project focused on scalable system design and real-world engineering practices.
+👨‍💻 Author
+
+Backend architecture project focused on scalable system design and async processing.
+
