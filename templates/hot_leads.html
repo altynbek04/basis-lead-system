@@ -1,0 +1,10 @@
+<h1>Hot Leads</h1>
+
+{% for lead in leads %}
+<div>
+    <b>{{ lead.name }}</b><br>
+    {{ lead.phone }}<br>
+    {{ lead.description }}
+</div>
+<hr>
+{% endfor %}
